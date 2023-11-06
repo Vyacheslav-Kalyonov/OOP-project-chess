@@ -60,11 +60,4 @@ public class BoardUtils {
 
         return result;
     }
-
-
-
-    public static void main(String[] args) {
-        List<Coordinates> diagonalCoordinatesBetween = getHorizontalCoordinatesBetween(new Coordinates(File.D, 4), new Coordinates(File.A, 4));
-        System.out.println(diagonalCoordinatesBetween);
-    }
 }

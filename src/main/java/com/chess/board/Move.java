@@ -9,4 +9,9 @@ public class Move {
         this.from = from;
         to = coordinates;
     }
+
+    @Override
+    public String toString() {
+        return from + " " + to;
+    }
 }

@@ -8,7 +8,6 @@ public class Main {
         Board board = (new BoardFactory()).fromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
         Game game = new Game(board);
 
-        System.out.println("Привет");
-        game.gameLoop();
+        game.playOrCheckHistory();
     }
 }

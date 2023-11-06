@@ -39,14 +39,38 @@ public class BoardConsoleRenderer {
                 }
             }
 
-
             line += ANSI_PRESET; // сброс цвета, чтобы не было закраски всей консоли
             System.out.println(line);
         }
+
+        System.out.print(" ");
+        for (File file : File.values()) {
+            System.out.print(file + "\t");
+        }
+        System.out.println();
     }
 
     public void render(Board board) {
         render(board, null);
+    }
+
+    private String selectUnicodeSpriteForPiece(Piece piece) {
+        return switch (PieceForConsoleRender.valueOf(piece.getClass().getSimpleName().toUpperCase())) {
+            case PAWN -> "♟︎";
+            case KNIGHT -> "♞";
+            case BISHOP -> "♝";
+            case ROOK -> "♜";
+            case QUEEN -> "♛";
+            case KING -> "♚";
+        };
+    }
+
+    private String getSpriteForEmptySquare(Coordinates coordinates, boolean isHighLight) {
+        return colorizeSprite("\t", Color.BLACK, Board.isSquareDark(coordinates), isHighLight);
+    }
+
+    private String getPieceSprite(Piece piece, boolean isHighLight) {
+        return colorizeSprite(selectUnicodeSpriteForPiece(piece) + "\t", piece.color, Board.isSquareDark(piece.coordinates), isHighLight);
     }
 
     private String colorizeSprite(String sprite, Color pieceColor, boolean isSquareDark, boolean isHighlight) {
@@ -68,26 +92,5 @@ public class BoardConsoleRenderer {
         }
 
         return result;
-    }
-
-
-
-    private String getSpriteForEmptySquare(Coordinates coordinates, boolean isHighLight) {
-        return colorizeSprite("   ", Color.BLACK, Board.isSquareDark(coordinates), isHighLight);
-    }
-
-    private String selectUnicodeSpriteForPiece(Piece piece) {
-        return switch (piece.getClass().getSimpleName()) {
-            case "Pawn" -> "♟︎";
-            case "Knight" -> "♞";
-            case "Bishop" -> "♝";
-            case "Rook" -> "♜";
-            case "Queen" -> "♛";
-            case "King" -> "♚";
-            default -> "";
-        };
-    }
-    private String getPieceSprite(Piece piece, boolean isHighLight) {
-        return colorizeSprite( " " + selectUnicodeSpriteForPiece(piece) + " ", piece.color, Board.isSquareDark(piece.coordinates), isHighLight);
     }
 }

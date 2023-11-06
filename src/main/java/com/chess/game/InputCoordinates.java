@@ -1,20 +1,18 @@
 package com.chess.game;
 
+import com.chess.board.*;
 import com.chess.coordinates.Color;
 import com.chess.coordinates.Coordinates;
 import com.chess.coordinates.File;
 import com.chess.piece.*;
-import com.chess.board.Board;
-import com.chess.board.BoardConsoleRenderer;
-import com.chess.board.BoardFactory;
-import com.chess.board.Move;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
 
 public class InputCoordinates {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static Coordinates input() {
         while (true) {
@@ -118,6 +116,20 @@ public class InputCoordinates {
         }
 
 
+    }
+
+    public static String inputPieceForSwapPawn() {
+        System.out.println("Input piece for swap (Queen, Rook, Bishop, Knight)");
+        String namePiece = scanner.nextLine();
+
+        while (true) {
+            if (namePiece.equals("Queen") || namePiece.equals("Rook") || namePiece.equals("Bishop") || namePiece.equals("Knight")) {
+                return namePiece;
+            } else {
+                System.out.println("Wrong piece");
+                namePiece = scanner.nextLine();
+            }
+        }
     }
 
     private static boolean validateIfKingInCheckAfterMove(Board board, Color color, Move move) {
