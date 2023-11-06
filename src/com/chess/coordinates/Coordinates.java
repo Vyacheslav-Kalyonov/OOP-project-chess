@@ -42,6 +42,9 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return file.name() + rank;
+        return "Coordinates{" +
+                "file=" + file +
+                ", rank=" + rank +
+                '}';
     }
 }

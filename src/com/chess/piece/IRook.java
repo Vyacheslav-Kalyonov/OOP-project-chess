@@ -1,19 +1,13 @@
 package com.chess.piece;
 
-import com.chess.coordinates.Color;
-import com.chess.coordinates.Coordinates;
 import com.chess.coordinates.CoordinatesShift;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Rook extends LongRangePiece {
-    public Rook(Color color, Coordinates coordinates) {
-        super(color, coordinates);
-    }
+public interface IRook {
 
-    @Override
-    protected Set<CoordinatesShift> getPieceMoves() {
+    default Set<CoordinatesShift> getRockMoves() {
         Set<CoordinatesShift> result = new HashSet<>();
 
         // слева снизу -> сверху справа
@@ -21,9 +15,13 @@ public class Rook extends LongRangePiece {
             if (i == 0) continue;
 
             result.add(new CoordinatesShift(i, 0));
-            result.add(new CoordinatesShift(0, i));
         }
 
+        for (int i = -7; i <= 7; i++) {
+            if (i == 0) continue;
+
+            result.add(new CoordinatesShift(0, i));
+        }
         return result;
     }
 }
