@@ -6,6 +6,8 @@ import org.junit.*;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DatabaseTest {
@@ -15,7 +17,7 @@ public class DatabaseTest {
 
     @Test
     public void lastIdInTableTest() {
-        Assert.assertEquals(8, dataBase.getLastId());
+        Assert.assertEquals(9, dataBase.getLastId());
         Assert.assertNotEquals(7, dataBase.getLastId());
     }
 
@@ -39,7 +41,7 @@ public class DatabaseTest {
         Assert.assertEquals(testCase, result);
     }
 
-/*    @Test
+    @Test
     public void getMovesTest() {
         addElementForTest();
         List<Move> testCase = new LinkedList<>();
@@ -48,7 +50,7 @@ public class DatabaseTest {
         String data = Arrays.toString(new List[]{dataBase.getMoves(dataBase.getLastId())});
         Assert.assertEquals(testCaseString, data);
         dataBase.deleteData(dataBase.getLastId());
-    }*/
+    }
 
     @Test
     public void deleteDataTest() {

@@ -2,17 +2,18 @@ package com.chess.database;
 
 import java.util.Properties;
 
-public class DatabaseProperties {
+public class DatabaseProperties extends Properties {
 
     public String getUrl() {
-        return "jdbc:postgresql://localhost:5432/chess_bd";
+        return getProperty("database.url");
     }
 
     public String getLogin() {
-        return "postgres";
+        return getProperty("database.user");
     }
 
     public String getPassword() {
-        return "380Slava123";
+        return getProperty("database.password");
     }
 }
+

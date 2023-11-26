@@ -14,7 +14,7 @@ public class Database {
 
     public Database() {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
+            DatabaseProperties properties = PropertiesFactory.getProperties();
             connection = DriverManager.getConnection(
                     properties.getUrl(),
                     properties.getLogin(),
