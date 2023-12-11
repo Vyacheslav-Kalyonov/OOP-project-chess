@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Coordinates {
 
-    public final File file; // неизменяемые координаты
+    private final File file; // неизменяемые координаты
 
-    public final Integer rank; // неизменяемые координаты
+    private final Integer rank; // неизменяемые координаты
 
     public Coordinates(File file, Integer rank) {
         this.file = file;
@@ -14,17 +14,22 @@ public class Coordinates {
     }
 
     public Coordinates shift(CoordinatesShift shift) {
-        return new Coordinates(File.values()[this.file.ordinal() + shift.fileShift], this.rank + shift.rankShift);
+        return new Coordinates(File.values()[this.file.ordinal() + shift.getFileShift()], this.rank + shift.getRankShift());
     }
 
     public boolean canShift(CoordinatesShift shift) {
-        int f = file.ordinal() + shift.fileShift;
-        int r = rank + shift.rankShift;
+        int f = file.ordinal() + shift.getFileShift();
+        int r = rank + shift.getRankShift();
 
-        if ((f < 0) || (f > 7)) return false;
-        if ((r < 1) || (r > 8)) return false;
+        return !((f < 0 || f > 7) || (r < 1 || r > 8));
+    }
 
-        return true;
+    public File getFile() {
+        return file;
+    }
+
+    public Integer getRank() {
+        return rank;
     }
 
     @Override

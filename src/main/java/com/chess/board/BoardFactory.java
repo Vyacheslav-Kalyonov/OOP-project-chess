@@ -40,9 +40,9 @@ public class BoardFactory {
     }
 
     public Board copy(Board source) {
-        Board clone = fromFEN(source.startingFen);
+        Board clone = fromFEN(source.getStartingFen());
 
-        for (Move move : source.moves) {
+        for (Move move : source.getMoves()) {
             clone.makeMove(move);
         }
 

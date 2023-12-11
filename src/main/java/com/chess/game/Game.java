@@ -136,11 +136,11 @@ public class Game {
         ZonedDateTime end = ZonedDateTime.now();
         String winner = state.getWinner(state);
 
-        dataBase.makeInsertSql(start, end, winner, board.moves);
+        dataBase.makeInsertSql(start, end, winner, board.getMoves());
         System.out.println("Game id : " + dataBase.getLastId());
     }
 
-    private GameState determineGameState(Board board, Color color) {
+        private GameState determineGameState(Board board, Color color) {
         for (GameStateChecker checker : checkers) {
             GameState state = checker.check(board, color);
 

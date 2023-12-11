@@ -18,10 +18,10 @@ public class Pawn extends Piece {
     @Override
     protected Set<CoordinatesShift> getPieceMoves() {
         Set<CoordinatesShift> result = new HashSet<>();
-        if (color == Color.WHITE) {
+        if (getColor() == Color.WHITE) {
             result.add(new CoordinatesShift(0, 1));
 
-            if (coordinates.rank == 2) {
+            if (getCoordinates().getRank() == 2) {
                 result.add(new CoordinatesShift(0, 2));
             }
 
@@ -30,7 +30,7 @@ public class Pawn extends Piece {
         } else {
             result.add(new CoordinatesShift(0, -1));
 
-            if (coordinates.rank == 7) {
+            if (getCoordinates().getRank() == 7) {
                 result.add(new CoordinatesShift(0, -2));
             }
 
@@ -43,11 +43,11 @@ public class Pawn extends Piece {
 
     @Override
     protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
-        if (this.coordinates.file == coordinates.file) {
-            int rankShift = Math.abs(this.coordinates.rank - coordinates.rank);
+        if (this.getCoordinates().getFile() == coordinates.getFile()) {
+            int rankShift = Math.abs(this.getCoordinates().getRank() - coordinates.getRank());
 
             if (rankShift == 2) {
-                List<Coordinates> between = BoardUtils.getVerticalCoordinatesBetween(this.coordinates, coordinates);
+                List<Coordinates> between = BoardUtils.getVerticalCoordinatesBetween(this.getCoordinates(), coordinates);
 
                 return (board.isSquareEmpty(between.get(0)) && board.isSquareEmpty(coordinates));
             } else {
@@ -58,7 +58,7 @@ public class Pawn extends Piece {
             if (board.isSquareEmpty(coordinates)) {
                 return false;
             } else {
-                return board.getPiece(coordinates).color != color;
+                return board.getPiece(coordinates).getColor() != getColor();
             }
         }
     }
@@ -67,7 +67,7 @@ public class Pawn extends Piece {
     protected Set<CoordinatesShift> getPieceAttacks() {
         Set<CoordinatesShift> result = new HashSet<>();
 
-        if (color == Color.WHITE) {
+        if (getColor() == Color.WHITE) {
             result.add(new CoordinatesShift(1, 1));
             result.add(new CoordinatesShift(-1, 1));
         } else {
@@ -77,6 +77,4 @@ public class Pawn extends Piece {
 
         return result;
     }
-
-
 }

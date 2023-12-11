@@ -10,12 +10,30 @@ import java.util.Set;
 
 // фигура абстрактная, все остальные фигуры наследуются от нее
 abstract public class Piece {
-    public final Color color;
-    public Coordinates coordinates;
+
+    protected Color color;
+
+    protected Coordinates coordinates;
 
     public Piece(Color color, Coordinates coordinates) {
         this.color = color;
         this.coordinates = coordinates;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     //  Все ходы фигур
@@ -37,7 +55,7 @@ abstract public class Piece {
 
     // проверка на возможность хода (проверяется пустота клетки или разный цвет фигур)
     protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
-        return board.isSquareEmpty(coordinates) || board.getPiece(coordinates).color != color;
+        return board.isSquareEmpty(coordinates) || (board.getPiece(coordinates).color != color);
     }
 
     // возможные ходы фигур

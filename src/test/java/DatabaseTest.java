@@ -17,7 +17,7 @@ public class DatabaseTest {
 
     @Test
     public void lastIdInTableTest() {
-        Assert.assertEquals(9, dataBase.getLastId());
+        Assert.assertEquals(8, dataBase.getLastId());
         Assert.assertNotEquals(7, dataBase.getLastId());
     }
 

@@ -35,7 +35,7 @@ public class King extends Piece {
         boolean result = super.isSquareAvailableForMove(coordinates, board);
 
         if (result) {
-            return !board.isSquareAttackedByColor(coordinates, color.opposite());
+            return !board.isSquareAttackedByColor(coordinates, getColor().opposite());
         }
 
         return false;

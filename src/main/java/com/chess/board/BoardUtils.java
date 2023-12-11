@@ -8,20 +8,30 @@ import java.util.List;
 
 public class BoardUtils {
 
-
     public static List<Coordinates> getDiagonalCoordinatesBetween(Coordinates source, Coordinates target) {
         // клетки лежат на одной диагонали
         List<Coordinates> result = new ArrayList<>();
 
         // проверки направления движения
-        int fileShift = source.file.ordinal() < target.file.ordinal() ? 1 : -1;
-        int rankShift = source.rank < target.rank ? 1 : -1;
+        int fileShift;
+        if (source.getFile().ordinal() < target.getFile().ordinal()) {
+            fileShift = 1;
+        } else {
+            fileShift = -1;
+        }
+
+        int rankShift;
+        if (source.getRank() < target.getRank()) {
+            rankShift = 1;
+        } else {
+            rankShift = -1;
+        }
 
         for (
-                int fileIndex = source.file.ordinal() + fileShift,
-                rank = source.rank + rankShift;
+                int fileIndex = source.getFile().ordinal() + fileShift,
+                rank = source.getRank() + rankShift;
 
-                fileIndex != target.file.ordinal() && rank != target.rank;
+                fileIndex != target.getFile().ordinal() && rank != target.getRank();
 
                 fileIndex += fileShift, rank += rankShift
         ) {
@@ -36,11 +46,15 @@ public class BoardUtils {
         List<Coordinates> result = new ArrayList<>();
 
         // проверки направления движения
-        int fileShift = source.file.ordinal() < target.file.ordinal() ? 1 : -1;
-        int rankShift = source.rank < target.rank ? 1 : -1;
+        int rankShift;
+        if (source.getRank() < target.getRank()) {
+            rankShift = 1;
+        } else {
+            rankShift = -1;
+        }
 
-        for (int rank = source.rank + rankShift; rank != target.rank; rank += rankShift) {
-            result.add(new Coordinates(source.file, rank));
+        for (int rank = source.getRank() + rankShift; rank != target.getRank(); rank += rankShift) {
+            result.add(new Coordinates(source.getFile(), rank));
         }
 
         return result;
@@ -51,11 +65,15 @@ public class BoardUtils {
         List<Coordinates> result = new ArrayList<>();
 
         // проверки направления движения
-        int fileShift = source.file.ordinal() < target.file.ordinal() ? 1 : -1;
+        int fileShift;
+        if (source.getFile().ordinal() < target.getFile().ordinal()) {
+            fileShift = 1;
+        } else {
+            fileShift = -1;
+        }
 
-
-        for (int fileIndex = source.file.ordinal() + fileShift; fileIndex != target.file.ordinal(); fileIndex += fileShift) {
-            result.add(new Coordinates(File.values()[fileIndex], source.rank));
+        for (int fileIndex = source.getFile().ordinal() + fileShift; fileIndex != target.getFile().ordinal(); fileIndex += fileShift) {
+            result.add(new Coordinates(File.values()[fileIndex], source.getRank()));
         }
 
         return result;

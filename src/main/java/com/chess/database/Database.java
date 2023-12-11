@@ -110,9 +110,7 @@ public class Database {
     public int getLastId() {
         try (Statement statement = connection.createStatement()) {
             String sql = """
-                    SELECT id
-                    FROM  history
-                    WHERE ID = (SELECT MAX(id)  FROM history)
+                    SELECT MAX(id) as id FROM history
                     """;
 
             ResultSet resultSet = statement.executeQuery(sql);

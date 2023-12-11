@@ -70,7 +70,7 @@ public class BoardConsoleRenderer {
     }
 
     private String getPieceSprite(Piece piece, boolean isHighLight) {
-        return colorizeSprite(selectUnicodeSpriteForPiece(piece) + "\t", piece.color, Board.isSquareDark(piece.coordinates), isHighLight);
+        return colorizeSprite(selectUnicodeSpriteForPiece(piece) + "\t", piece.getColor(), Board.isSquareDark(piece.getCoordinates()), isHighLight);
     }
 
     private String colorizeSprite(String sprite, Color pieceColor, boolean isSquareDark, boolean isHighlight) {

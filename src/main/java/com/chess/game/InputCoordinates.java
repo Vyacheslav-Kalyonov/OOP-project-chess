@@ -65,7 +65,7 @@ public class InputCoordinates {
             }
 
             Piece piece = board.getPiece(coordinates);
-            if (piece.color != color) {
+            if (piece.getColor() != color) {
                 System.out.println("Wrong color");
                 continue;
             }
@@ -137,8 +137,8 @@ public class InputCoordinates {
         copy.makeMove(move);
 
         Piece king = copy.getPiecesByColor(color).stream().filter(piece -> piece instanceof King).findFirst().get();
-        copy.isSquareAttackedByColor(king.coordinates, color.opposite());
+        copy.isSquareAttackedByColor(king.getCoordinates(), color.opposite());
 
-        return copy.isSquareAttackedByColor(king.coordinates, color.opposite());
+        return copy.isSquareAttackedByColor(king.getCoordinates(), color.opposite());
     }
 }

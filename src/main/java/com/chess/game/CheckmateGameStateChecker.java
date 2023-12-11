@@ -19,7 +19,7 @@ public class CheckmateGameStateChecker extends GameStateChecker {
         
         Piece king = board.getPiecesByColor(color).stream().filter(piece -> piece instanceof King).findFirst().get();
         
-        if (!board.isSquareAttackedByColor(king.coordinates, color.opposite())) {
+        if (!board.isSquareAttackedByColor(king.getCoordinates(), color.opposite())) {
             return GameState.ONGOING;
         }
 
@@ -30,12 +30,12 @@ public class CheckmateGameStateChecker extends GameStateChecker {
 
             for (Coordinates coordinates : availableMoveSquares) {
                 Board clone = new BoardFactory().copy(board);
-                clone.makeMove(new Move(piece.coordinates, coordinates));
+                clone.makeMove(new Move(piece.getCoordinates(), coordinates));
 
                 Piece cloneKing = clone.getPiecesByColor(color).stream().filter(p -> p instanceof King).findFirst().get();
 
 
-                if (!clone.isSquareAttackedByColor(cloneKing.coordinates, color.opposite())) {
+                if (!clone.isSquareAttackedByColor(cloneKing.getCoordinates(), color.opposite())) {
                     return GameState.ONGOING;
                 }
             }

@@ -27,12 +27,12 @@ public abstract class LongRangePiece extends Piece {
     @Override
     protected boolean isSquareAvailableForAttack(Coordinates shiftedCoordinates, Board board) {
         List<Coordinates> coordinatesBetween;
-        if (this.coordinates.file == shiftedCoordinates.file) {
-            coordinatesBetween = BoardUtils.getVerticalCoordinatesBetween(this.coordinates, shiftedCoordinates);
-        } else if (this.coordinates.rank == shiftedCoordinates.rank) {
-            coordinatesBetween = BoardUtils.getHorizontalCoordinatesBetween(this.coordinates, shiftedCoordinates);
+        if (this.getCoordinates().getFile() == shiftedCoordinates.getFile()) {
+            coordinatesBetween = BoardUtils.getVerticalCoordinatesBetween(this.getCoordinates(), shiftedCoordinates);
+        } else if (this.getCoordinates().getRank() == shiftedCoordinates.getRank()) {
+            coordinatesBetween = BoardUtils.getHorizontalCoordinatesBetween(this.getCoordinates(), shiftedCoordinates);
         } else {
-            coordinatesBetween = BoardUtils.getDiagonalCoordinatesBetween(this.coordinates, shiftedCoordinates);
+            coordinatesBetween = BoardUtils.getDiagonalCoordinatesBetween(this.getCoordinates(), shiftedCoordinates);
         }
 
         for (Coordinates c: coordinatesBetween) {

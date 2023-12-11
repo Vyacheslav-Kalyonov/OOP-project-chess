@@ -1,5 +1,4 @@
 import com.chess.board.Board;
-import com.chess.board.BoardConsoleRenderer;
 import com.chess.board.BoardFactory;
 import com.chess.coordinates.Color;
 import com.chess.coordinates.Coordinates;

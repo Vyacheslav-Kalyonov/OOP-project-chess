@@ -11,21 +11,33 @@ import java.util.List;
 import java.util.Set;
 
 public class Board {
-    public final String startingFen;
-    public HashMap<Coordinates, Piece> pieces = new HashMap<>(); // Для доски. Ключ - координата, значения - фигура
+    private final String startingFen;
+    private HashMap<Coordinates, Piece> pieces = new HashMap<>(); // Для доски. Ключ - координата, значения - фигура
 
-    public List<Move> moves = new ArrayList<>();
+    private List<Move> moves = new ArrayList<>();
 
     public Board(String startingFen) {
         this.startingFen = startingFen;
     }
 
     public static boolean isSquareDark(Coordinates coordinates) {
-        return (((coordinates.file.ordinal() + 1) + coordinates.rank) % 2) == 0;
+        return (coordinates.getFile().ordinal() + 1 + coordinates.getRank()) % 2 == 0;
     }
 
     public boolean isSquareEmpty(Coordinates coordinates) {
         return !pieces.containsKey(coordinates);
+    }
+
+    public String getStartingFen() {
+        return startingFen;
+    }
+
+    public HashMap<Coordinates, Piece> getPieces() {
+        return pieces;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
     }
 
     public boolean isSquareAttackedByColor(Coordinates coordinates, Color color) {
@@ -46,7 +58,7 @@ public class Board {
         List<Piece> result = new ArrayList<>();
 
         for (Piece piece : pieces.values()) {
-            if (piece.color == color) {
+            if (piece.getColor() == color) {
                 result.add(piece);
             }
         }
@@ -55,22 +67,22 @@ public class Board {
     }
 
     public void makeMove(Move move) {
-        Piece piece = getPiece(move.from);
+        Piece piece = getPiece(move.getFrom());
 
-        removePiece(move.from);
-        setPiece(move.to, piece);
+        removePiece(move.getFrom());
+        setPiece(move.getTo(), piece);
 
         moves.add(move);
     }
 
     public void checkPawnPosition(Move move) {
-        Piece piece = getPiece(move.to);
+        Piece piece = getPiece(move.getTo());
 
-        if ((getPiece(move.to) instanceof Pawn) && (move.to.rank == 1 || move.to.rank == 8)) {
+        if ((getPiece(move.getTo()) instanceof Pawn) && (move.getTo().getRank() == 1 || move.getTo().getRank() == 8)) {
             // метод введения фигуры
-            if (getPiece(move.to) instanceof Pawn) {
+            if (getPiece(move.getTo()) instanceof Pawn) {
                 String namePiece = InputCoordinates.inputPieceForSwapPawn();
-                setPieceForSwapPawn(namePiece, move.to, piece.color);
+                setPieceForSwapPawn(namePiece, move.getTo(), piece.getColor());
             }
         }
 
@@ -96,7 +108,7 @@ public class Board {
     }
 
     public void setPiece(Coordinates coordinates, Piece piece) {
-        piece.coordinates = coordinates;
+        piece.setCoordinates(coordinates);
         pieces.put(coordinates, piece);
     }
 }
